@@ -1,0 +1,29 @@
+{
+	"name": "jp-cloud-experiment",
+	"version": "1.0.0",
+	"description": "Jetpack Cloud Experiment",
+	"main": "build/index.js",
+	"scripts": {
+		"start": "wp-scripts start",
+		"build": "wp-scripts build"
+	},
+	"keywords": [
+		"jetpack",
+		"cloud",
+		"experiment"
+	],
+	"author": "delawski",
+	"license": "GPL-2.0-only",
+	"devDependencies": {
+		"@wordpress/browserslist-config": "2.6.0",
+		"@wordpress/eslint-plugin": "^3.1.0",
+		"@wordpress/scripts": "5.0.1",
+		"browserslist": "4.7.0",
+		"stylelint-config-wordpress": "13.1.0"
+	},
+	"dependencies": {
+		"@wordpress/components": "8.3.1",
+		"@wordpress/element": "^2.8.1",
+		"lodash": "^4.17.15"
+	}
+}
