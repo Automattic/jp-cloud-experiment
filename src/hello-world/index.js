@@ -4,7 +4,12 @@
 import apiFetch from '@wordpress/api-fetch';
 import { useState, useEffect } from '@wordpress/element';
 import { Button, Panel, PanelBody, PanelRow } from '@wordpress/components';
-import proxy from 'wpcom-proxy-request';
+
+/**
+ * External dependencies
+ */
+import wpcom from 'wpcom';
+import wpcomOAuth from 'wpcom-oauth-cors';
 
 const rootURL = 'https://ma.tt/wp-json/';
 apiFetch.use( apiFetch.createRootURLMiddleware( rootURL ) );
@@ -20,13 +25,20 @@ const HelloWorld = () => {
 	}, [] );
 
 	useEffect( () => {
-		proxy( '/me', function( err, body, headers ) {
-			if ( err ) {
-				throw err;
-			}
-
-			console.log( body );
-			setWpcomData( body );
+		wpcomOAuth( '67055' );
+		wpcomOAuth.get( ( auth ) => {
+			const api = wpcom( auth.access_token );
+			const site = api.site( auth.site_id );
+			site
+				.postsList( {
+					number: 8,
+				} )
+				.then( ( list ) => {
+					setWpcomData( list.posts );
+				} )
+				.catch( ( error ) => {
+					throw error;
+				} );
 		} );
 	}, [] );
 
@@ -53,7 +65,13 @@ const HelloWorld = () => {
 				) }
 				{ wpcomData && (
 					<PanelRow>
-						{ wpcomData }
+						<ul>
+							{ wpcomData.map( ( { ID, title } ) => (
+								<li key={ ID }>
+									{ title }
+								</li>
+							) ) }
+						</ul>
 					</PanelRow>
 				) }
 			</PanelBody>
