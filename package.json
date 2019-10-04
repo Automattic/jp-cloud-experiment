@@ -26,7 +26,9 @@
 	"dependencies": {
 		"@wordpress/api-fetch": "3.6.1",
 		"@wordpress/components": "8.3.1",
+		"@wordpress/date": "3.5.0",
 		"@wordpress/element": "^2.8.1",
+		"@wordpress/i18n": "3.6.1",
 		"lodash": "^4.17.15",
 		"wpcom": "5.4.2",
 		"wpcom-oauth-cors": "1.0.2-beta"
