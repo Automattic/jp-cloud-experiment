@@ -4,7 +4,6 @@
 import apiFetch from '@wordpress/api-fetch';
 import { useState, useEffect } from '@wordpress/element';
 import { Button, Panel, PanelBody, PanelRow, Spinner } from '@wordpress/components';
-import { __ } from '@wordpress/i18n';
 import { dateI18n } from '@wordpress/date';
 import { getQueryArg } from '@wordpress/url';
 
@@ -13,6 +12,7 @@ import { getQueryArg } from '@wordpress/url';
  */
 import wpcom from 'wpcom';
 import wpcomOAuth from 'wpcom-oauth-cors';
+import { translate as __ } from 'i18n-calypso';
 import { get } from 'lodash';
 
 const CLIENT_ID = '67055';
