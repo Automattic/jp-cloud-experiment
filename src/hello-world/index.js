@@ -8,6 +8,11 @@ import { dateI18n } from '@wordpress/date';
 import { getQueryArg } from '@wordpress/url';
 
 /**
+ * Internal dependencies
+ */
+import analytics from '../lib/analytics';
+
+/**
  * External dependencies
  */
 import wpcom from 'wpcom';
@@ -20,6 +25,8 @@ const CLIENT_ID = '67055';
 const rootURL = 'https://ma.tt/wp-json/';
 apiFetch.use( apiFetch.createRootURLMiddleware( rootURL ) );
 
+localStorage.setItem( 'debug', 'jpc:analytics' );
+
 const HelloWorld = () => {
 	const siteId = getQueryArg( window.location.href, 'site' );
 	const [ posts, setPosts ] = useState( [] );
@@ -31,6 +38,9 @@ const HelloWorld = () => {
 
 	function loadMoreItems() {
 		if ( hasMorePages() ) {
+			analytics.tracks.recordEvent( 'jetpack_cloud_backups_list_load_more', {
+				site_id: siteId,
+			} );
 			setBackupsPage( backupsPage + 1 );
 		}
 	}
