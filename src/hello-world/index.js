@@ -12,7 +12,7 @@ import { getQueryArg } from '@wordpress/url';
  */
 import wpcom from 'wpcom';
 import wpcomOAuth from 'wpcom-oauth-cors';
-import { translate as __ } from 'i18n-calypso';
+import { translate } from 'i18n-calypso';
 import { get } from 'lodash';
 
 const CLIENT_ID = '67055';
@@ -90,24 +90,24 @@ const HelloWorld = () => {
 	}, [ api, backupsPage ] );
 
 	return (
-		<Panel header={ __( 'API Requests Tests' ) }>
+		<Panel header={ translate( 'API Requests Tests' ) }>
 			{ posts && (
 				<PanelBody
-					title={ __( 'Public API call' ) }
+					title={ translate( 'Public API call' ) }
 					icon=""
 					initialOpen={ false }
 				>
 					<PanelRow>
 						<ul>
 							{ posts.map( ( { id, title } ) => (
-								<li key={ id } dangerouslySetInnerHTML={ { __html: title.rendered } } />
+								<li key={ id } dangerouslySetInnerHTML={ { translatehtml: title.rendered } } />
 							) ) }
 						</ul>
 					</PanelRow>
 				</PanelBody>
 			) }
 			<PanelBody
-				title={ __( 'Backups via authenticated call' ) }
+				title={ translate( 'Backups via authenticated call' ) }
 				icon=""
 				initialOpen={ true }
 			>
@@ -130,7 +130,7 @@ const HelloWorld = () => {
 						onClick={ loadMoreItems }
 						isPrimary
 						disabled={ ! hasMorePages() || isLoading }>
-						{ __( 'Load more items' ) }
+						{ translate( 'Load more items' ) }
 					</Button>
 				</PanelRow>
 			</PanelBody>
