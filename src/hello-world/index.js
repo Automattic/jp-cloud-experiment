@@ -6,6 +6,7 @@ import { useState, useEffect } from '@wordpress/element';
 import { Button, Panel, PanelBody, PanelRow, Spinner } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 import { dateI18n } from '@wordpress/date';
+import { getQueryArg } from '@wordpress/url';
 
 /**
  * External dependencies
@@ -20,7 +21,7 @@ const rootURL = 'https://ma.tt/wp-json/';
 apiFetch.use( apiFetch.createRootURLMiddleware( rootURL ) );
 
 const HelloWorld = () => {
-	const siteUrl = 'testsite108699957.blog';
+	const siteId = getQueryArg( window.location.href, 'site' );
 	const [ posts, setPosts ] = useState( [] );
 	const [ api, setApi ] = useState( null );
 	const [ backupsPage, setBackupsPage ] = useState( 1 );
@@ -45,12 +46,16 @@ const HelloWorld = () => {
 	}, [] );
 
 	useEffect( () => {
-		if ( ! siteUrl || '' === siteUrl ) {
+		if ( ! siteId || '' === siteId ) {
 			return;
 		}
 
 		wpcomOAuth( CLIENT_ID );
 		wpcomOAuth.get( ( auth ) => {
+			if ( ! auth ) {
+				wpcomOAuth( CLIENT_ID ).reset();
+				return;
+			}
 			setApi( wpcom( auth.access_token ) );
 		} );
 	}, [] );
@@ -65,8 +70,13 @@ const HelloWorld = () => {
 		};
 
 		setIsLoading( true );
+		api.req.get( `/sites/${ siteId }/activity?_envelope=1&aggregate=true&group%5B%5D=rewind&number=5&page=${ backupsPage }`, query, ( err, data ) => {
+			if ( 400 <= data.status ) {
+				console.error( data.body.code );
+				wpcomOAuth( CLIENT_ID ).reset();
+				return;
+			}
 
-		api.req.get( `/sites/${ siteUrl }/activity?_envelope=1&aggregate=true&group%5B%5D=rewind&number=5&page=${ backupsPage }`, query, ( err, data ) => {
 			setIsLoading( false );
 
 			const totalPages = get( data, 'body.totalPages', totalBackupsPages );
