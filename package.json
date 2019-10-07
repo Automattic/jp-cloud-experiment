@@ -15,6 +15,8 @@
 	"author": "delawski",
 	"license": "GPL-2.0-only",
 	"devDependencies": {
+		"@babel/core": "7.6.2",
+		"@wordpress/babel-preset-default": "4.6.1",
 		"@wordpress/browserslist-config": "2.6.0",
 		"@wordpress/eslint-plugin": "^3.1.0",
 		"@wordpress/scripts": "5.0.1",
@@ -24,7 +26,12 @@
 	"dependencies": {
 		"@wordpress/api-fetch": "3.6.1",
 		"@wordpress/components": "8.3.1",
+		"@wordpress/date": "3.5.0",
 		"@wordpress/element": "^2.8.1",
-		"lodash": "^4.17.15"
+		"@wordpress/i18n": "3.6.1",
+		"@wordpress/url": "2.8.0",
+		"lodash": "^4.17.15",
+		"wpcom": "5.4.2",
+		"wpcom-oauth-cors": "1.0.2-beta"
 	}
 }
