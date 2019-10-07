@@ -100,7 +100,7 @@ const HelloWorld = () => {
 					<PanelRow>
 						<ul>
 							{ posts.map( ( { id, title } ) => (
-								<li key={ id } dangerouslySetInnerHTML={ { translatehtml: title.rendered } } />
+								<li key={ id } dangerouslySetInnerHTML={ { __html: title.rendered } } />
 							) ) }
 						</ul>
 					</PanelRow>
