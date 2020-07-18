@@ -32,7 +32,7 @@
 		"@wordpress/url": "2.8.0",
 		"debug": "3.2.6",
 		"i18n-calypso": "3.0.0",
-		"lodash": "^4.17.15",
+		"lodash": "^4.17.19",
 		"wpcom": "5.4.2",
 		"wpcom-oauth-cors": "1.0.2-beta"
 	}
